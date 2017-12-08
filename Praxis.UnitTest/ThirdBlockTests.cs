@@ -11,7 +11,7 @@ namespace Praxis.UnitTest
         public void Test1293()
         {
             var task = Constants.Tasks[1293];
-            Assert.AreEqual(ThirdBlock.Task1293(task.Item1), task.Item2);
+            Assert.AreEqual(TaskBlock.Task1293(task.Item1), task.Item2);
         }
     }
 }

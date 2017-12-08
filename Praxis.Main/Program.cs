@@ -12,7 +12,7 @@ namespace Praxis.Main
             var input = Console.In.ReadToEnd();
 
             time.Start();
-            Console.WriteLine($"\nResult - {FirstBlock.Task1000(input)}");
+            Console.WriteLine($"\nResult - {TaskBlock.Task1000(input)}");
             time.Stop();
 
             Console.WriteLine($"Time of decision, ms - {time.ElapsedMilliseconds}");
