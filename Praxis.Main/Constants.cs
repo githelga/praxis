@@ -58,7 +58,13 @@ No solution.")},
 No solution.")},
             { 1005, new Tuple<string, string>(@"5
             5 8 13 27 14", "3")},
+            { 1014, new Tuple<string, string>("10", "25")},
             { 1068, new Tuple<string, string>("-3", "-5")},
+            { 1079, new Tuple<string, string>(@"5
+10
+0", @"3
+4")},
+            { 1293, new Tuple<string, string>("5 2 3", "60")},
         };
     }
 }
