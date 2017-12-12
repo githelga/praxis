@@ -1,4 +1,6 @@
-﻿namespace Praxis.Main.Tasks
+﻿using System.Linq;
+
+namespace Praxis.Main.Tasks
 {
     public static partial class TaskBlock
     {
@@ -9,7 +11,8 @@
 
         public static string Task2001(string input)
         {
-            return "";
+            var arr = input.GetArrayFromString<int>().ToArray();
+            return $"{arr[0] - arr[4]} {arr[1] - arr[3]}";
         }
 
         public static string Task2002(string input)
@@ -64,7 +67,7 @@
 
         public static string Task2012(string input)
         {
-            return "";
+            return ushort.Parse(input) + 5 >= 12 ? "YES" : "NO";
         }
 
         public static string Task2013(string input)
@@ -284,7 +287,16 @@
 
         public static string Task2056(string input)
         {
-            return "";
+            /*var count = ushort.Parse(Console.ReadLine());
+            var markers = new List<ushort>();
+            while (count != 0)
+            {
+                markers.Add(ushort.Parse(Console.ReadLine()));
+                count--;
+            }*/
+
+            var markers = input.GetArrayFromString<ushort>().Skip(1).ToList();
+            return markers.Any(x => x < 4) ? "None" : markers.All(x => x == 5) ? "Named" : markers.Sum(x => (double) x) / markers.Count >= 4.5 ? "High" : "Common";
         }
 
         public static string Task2057(string input)

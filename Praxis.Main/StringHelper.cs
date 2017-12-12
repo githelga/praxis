@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 
 namespace Praxis.Main
 {
@@ -8,17 +8,16 @@ namespace Praxis.Main
     {
         private static IEnumerable<string> GetParts(this string s)
         {
-            return s.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            return s.Split(new[] {' ', '\t', '\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public static IEnumerable<int> GetIntArrayFromString(this string input)
+        public static IEnumerable<T> GetArrayFromString<T>(this string input) where T: struct
         {
-            return input.GetParts().Select(int.Parse);
-        }
-
-        public static IEnumerable<double> GetDoubleArrayFromString(this string input)
-        {
-            return input.GetParts().Select(x => double.Parse(x, Constants.Nfi));
+            var converter = TypeDescriptor.GetConverter(typeof(T));
+            foreach (var item in input.GetParts())
+            {
+                yield return (T)converter.ConvertFrom(item);
+            }
         }
     }
 }

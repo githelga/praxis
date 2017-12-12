@@ -65,6 +65,17 @@ No solution.")},
 0", @"3
 4")},
             { 1293, new Tuple<string, string>("5 2 3", "60")},
+            { 2001, new Tuple<string, string>(@"1 2
+2 1
+0 3", @"1 1")},
+            { 2012, new Tuple<string, string>("7", "YES")},
+            { 2056, new Tuple<string, string>(@"3
+5
+5
+4", "High")},
+            { 2066, new Tuple<string, string>(@"1
+2
+3", "-5")},
         };
     }
 }

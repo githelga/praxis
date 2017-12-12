@@ -471,7 +471,7 @@ namespace Praxis.Main.Tasks
 
         public static string Task1293(string input)
         {
-            var tokens = input.GetIntArrayFromString().ToArray();
+            var tokens = input.GetArrayFromString<int>().ToArray();
             return $"{2 * tokens[0] * tokens[1] * tokens[2]}";
         }
 

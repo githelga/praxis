@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Praxis.Main.Tasks
 {
@@ -7,20 +9,57 @@ namespace Praxis.Main.Tasks
     {
         public static string Task1000(string input)
         {
-            var arr = input.GetIntArrayFromString().ToArray();
+            var arr = input.GetArrayFromString<int>().ToArray();
             return Enumerable.Range(0, arr.Length).Sum(x => arr[x]).ToString();
         }
 
         public static string Task1001(string input)
         {
-            var arr = input.GetDoubleArrayFromString().Reverse().ToArray();
+            var arr = input.GetArrayFromString<double>().Reverse().ToArray();
             return string.Join("\r\n",
                 Enumerable.Range(0, arr.Length).Select(x => string.Format(Constants.Nfi, "{0:F4}", Math.Sqrt(arr[x]))));
         }
 
         public static string Task1002(string input)
         {
-            return "";
+            var dict = new Dictionary<char, char[]>()
+            {
+                {'1', new[] {'i', 'j'}},
+                {'2', new[] {'a', 'b', 'c'}},
+                {'3', new[] {'d', 'e', 'f'}},
+                {'4', new[] {'g', 'h'}},
+                {'5', new[] {'k', 'l'}},
+                {'6', new[] {'m', 'n'}},
+                {'7', new[] {'p', 'r', 's'}},
+                {'8', new[] {'t', 'u', 'v'}},
+                {'9', new[] {'w', 'x', 'y'}},
+                {'0', new[] {'o', 'q', 'z'}}
+            };
+
+            var result = new List<string>();
+            var str = Console.ReadLine();
+            while (!string.Equals(str, "-1"))
+            {
+                var pattern = "[" + string.Join("][", str.ToCharArray().Select(x => string.Join(",", dict[x]))) + "]";
+                var i = int.Parse(Console.ReadLine());
+                var words = new List<string>();
+                while (i != 0)
+                {
+                    words.Add(Console.ReadLine());
+                    i--;
+                }
+                var regex = new Regex(@pattern);
+                foreach (var item in words)
+                {
+                    if (regex.IsMatch(item))
+                    {
+                        
+                    }
+                }
+                result.Add(regex.IsMatch(words[0]) ? $"{words[0]} {words[1]}" : "No solution.");
+            }
+
+            return string.Join("\r\n", result);
         }
 
         public static string Task1003(string input)
@@ -35,7 +74,7 @@ namespace Praxis.Main.Tasks
 
         public static string Task1005(string input)
         {
-            var arr = input.GetIntArrayFromString().Skip(1).ToArray();
+            var arr = input.GetArrayFromString<int>().Skip(1).ToArray();
 
             var min = arr.Length < 2
                 ? arr.FirstOrDefault()
@@ -92,6 +131,23 @@ namespace Praxis.Main.Tasks
 
         public static string Task1014(string input)
         {
+            var number = int.Parse(input);
+            var simpleNumbers = new List<int>();
+            var p = 2;
+            var allNumbers = Enumerable.Range(p, number - 1).ToList();
+            while (allNumbers.Any(x => x % p == 0))
+            {
+                simpleNumbers.Add(p);
+                foreach (var i in allNumbers.Where(x => x % p == 0).ToList())
+                    allNumbers.Remove(i);
+
+                if(allNumbers.Count == 0)
+                    break;
+
+                p = allNumbers.Min();
+            }
+            if (simpleNumbers.Any(x => x == number))
+                return "-1";
             return "";
         }
 
@@ -416,9 +472,23 @@ namespace Praxis.Main.Tasks
             return "";
         }
 
-        public static string Task1079(string input)
+        public static void Task1079()
         {
-            return "";
+            var number = int.Parse(Console.ReadLine());
+            var result = new List<int>();
+            while (number != 0)
+            {
+                var i = 1;
+                var words = new List<string>();
+                while (number - i >= 0)
+                {
+                    number -= i;
+                    i++;
+                }
+                result.Add(number);
+                number = int.Parse(Console.ReadLine());
+            }
+            Console.WriteLine(string.Join("\r\n", result));
         }
 
         public static string Task1080(string input)
